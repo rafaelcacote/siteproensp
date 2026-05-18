@@ -93,15 +93,27 @@
 
       <div class="mt-10 flex flex-col gap-3 border-t border-white/20 pt-5 text-xs text-white/80 md:flex-row md:items-center md:justify-between">
         <p>© 2020 Programa de Pós-graduação em Enfermagem em Saúde Pública (ProEnSP). Todos os direitos reservados.</p>
-        <a href="#" class="font-medium text-white hover:underline">Área Administrativa</a>
+        <a
+          :href="adminLoginUrl"
+          class="font-medium text-white hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Área Administrativa</a>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
+import { getApiBase } from '@/api/noticias';
 import logoProensp from '@/assets/proensp-branco.png';
 import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from 'lucide-vue-next';
+import { computed } from 'vue';
+
+const adminLoginUrl = computed(() => {
+  const base = getApiBase();
+  return base ? `${base}/login` : '#';
+});
 
 const socialLinks = [
   { label: 'Facebook', href: '#', icon: Facebook },
@@ -112,8 +124,9 @@ const socialLinks = [
 
 const quickLinks = [
   { label: 'Início', to: '/' },
+  { label: 'Notícias', to: '/#noticias' },
   { label: 'Apresentação', to: '/apresentacao' },
-  { label: 'Coordenação e Colegiado', to: '/apresentacao' },
+  { label: 'Coordenação e Colegiado', to: '/colegiado' },
   { label: 'Legislação', to: '/apresentacao' },
 ];
 </script>

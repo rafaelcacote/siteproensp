@@ -220,4 +220,40 @@
       max-width: 1280px;
     }
   }
+
+  /* Marca d'água — logo oficial ProEnSP (src/assets/logo.svg) */
+  .logo-watermark {
+    opacity: 0.11;
+  }
+
+  /* logo_hero.svg já traz tons claros (#dff2f4, #f9f9f9) */
+  .logo-watermark-hero {
+    opacity: 1;
+  }
+
+  /* TabMenu — página Colegiado (PrimeVue) */
+  .colegiado-section-nav .p-tabmenu-nav {
+    background: transparent;
+    border: none;
+    gap: 0.25rem;
+  }
+
+  .colegiado-section-nav .p-tabmenuitem .p-menuitem-link {
+    border-radius: 0.75rem;
+    font-family: var(--font-accent);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.65rem 1rem;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .colegiado-section-nav .p-tabmenuitem.p-tabmenuitem-active .p-menuitem-link {
+    background: color-mix(in srgb, var(--primary) 12%, white);
+    color: var(--primary);
+  }
+
+  .colegiado-section-nav .p-tabmenuitem:not(.p-tabmenuitem-active) .p-menuitem-link:hover {
+    background: color-mix(in srgb, var(--primary) 6%, white);
+    color: var(--primary);
+  }
 }

@@ -1,16 +1,43 @@
 <template>
-  <header class="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+  <header class="sticky top-0 z-50 border-b border-border/80 bg-white/85 shadow-[0_10px_26px_rgba(14,116,130,0.08)] backdrop-blur-xl">
     <div class="container">
       <div class="flex items-center justify-between py-3">
         <!-- Logo Section -->
-        <div class="flex items-center gap-3">
-          <div class="h-12 flex items-center">
-            <span class="text-xl font-bold text-primary font-display">ProEnSP</span>
-          </div>
+        <div class="flex h-12 items-center gap-2 shrink-0 sm:gap-3">
+          <RouterLink
+            to="/"
+            class="flex h-12 items-center shrink-0"
+            aria-label="ProEnSP — Início"
+          >
+            <img
+              :src="proenspLogo"
+              alt="ProEnSP"
+              class="h-10 w-auto max-h-12 object-contain object-left sm:h-11"
+              width="180"
+              height="60"
+              decoding="async"
+            />
+          </RouterLink>
+          <a
+            href="https://www.uea.edu.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex h-12 items-center border-l border-border pl-2 sm:pl-3 shrink-0"
+            aria-label="UEA — site oficial (abre em nova aba)"
+          >
+            <img
+              :src="logoUea"
+              alt="Universidade do Estado do Amazonas (UEA)"
+              class="h-9 w-auto max-h-10 object-contain object-left sm:h-10 sm:max-h-11"
+              width="120"
+              height="48"
+              decoding="async"
+            />
+          </a>
         </div>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center gap-8">
+        <nav class="hidden items-center gap-7 lg:flex">
           <div
             v-for="item in navigationItems"
             :key="item.label"
@@ -18,14 +45,14 @@
           >
             <RouterLink
               :to="item.href"
-              class="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 relative"
+              class="relative inline-flex items-center gap-1 text-sm font-medium text-foreground/85 transition-colors duration-200 hover:text-primary"
             >
               {{ item.label }}
               <ChevronDown
                 v-if="item.children"
                 class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
               />
-              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+              <span class="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-cyan-400 transition-all duration-300 group-hover:w-full" />
             </RouterLink>
 
             <div
@@ -48,7 +75,7 @@
 
         <!-- CTA Button - Desktop -->
         <div class="hidden lg:block">
-          <button class="btn-primary text-sm">
+          <button class="rounded-xl bg-gradient-to-r from-[#0f9fb5] to-[#22bec8] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-cyan-200/60 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cyan-300/60">
             Contato
           </button>
         </div>
@@ -56,7 +83,7 @@
         <!-- Mobile Menu Button -->
         <button
           @click="isMenuOpen = !isMenuOpen"
-          class="lg:hidden p-2 hover:bg-muted rounded-md transition-colors duration-200"
+          class="rounded-md p-2 transition-colors duration-200 hover:bg-primary/10 lg:hidden"
           aria-label="Toggle menu"
         >
           <X v-if="isMenuOpen" class="w-5 h-5 text-foreground" />
@@ -107,7 +134,7 @@
               </RouterLink>
             </div>
           </div>
-          <button class="btn-primary w-full mt-2 text-sm">
+          <button class="mt-2 w-full rounded-xl bg-gradient-to-r from-[#0f9fb5] to-[#22bec8] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-cyan-200/60 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-300/60">
             Contato
           </button>
         </div>
@@ -119,18 +146,21 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { ChevronDown, Menu, X } from 'lucide-vue-next';
+import proenspLogo from '@/assets/proensp-logo.png';
+import logoUea from '@/assets/Logo_UEA.avif';
 
 const isMenuOpen = ref(false);
 const openMobileSubmenu = ref<string | null>(null);
 
 const navigationItems = [
   { label: 'Início', href: '/' },
+  { label: 'Notícias', href: '/#noticias' },
   {
     label: 'Institucional',
     href: '/apresentacao',
     children: [
       { label: 'Apresentação', href: '/apresentacao' },
-      { label: 'Coordenação e Colegiado', href: '#' },
+      { label: 'Coordenação e Colegiado', href: '/colegiado' },
       { label: 'Legislação', href: '#' },
       { label: 'Galeria de Fotos', href: '#' },
     ],
