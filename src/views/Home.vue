@@ -140,10 +140,10 @@ interface IndicatorItem { value: string; label: string; sub: string; icon: Compo
 interface AreaItem { title: string; icon: Component }
 
 const indicators: IndicatorItem[] = [
-  { value: '+20',  label: 'Anos de história',        sub: 'Formando profissionais',    icon: UsersRound },
-  { value: '+200', label: 'Discentes formados',       sub: 'Mestres e especialistas',   icon: GraduationCap },
-  { value: '+150', label: 'Produções científicas',    sub: 'Impacto na Amazônia',       icon: BookOpen },
-  { value: '100%', label: 'Compromisso com o SUS',   sub: 'Ética, equidade e inclusão', icon: Heart },
+  { value: '+7',   label: 'Anos de história',        sub: 'Formando profissionais',              icon: UsersRound },
+  { value: '+63',  label: 'Discentes formados',       sub: 'Mestres e especialistas',             icon: GraduationCap },
+  { value: '75',   label: 'Produções científicas',   sub: 'Produzidas com impacto na Amazônia',  icon: BookOpen },
+  { value: '100%', label: 'Compromisso com o SUS',   sub: 'Ética, equidade e inclusão',          icon: Heart },
 ];
 
 const areas: AreaItem[] = [
