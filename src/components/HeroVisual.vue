@@ -1,47 +1,56 @@
 <template>
-  <div class="relative hidden lg:block">
-    <!-- Foto institucional com recorte orgânico (como na referência) -->
-    <div
-      class="relative h-[26rem] w-full overflow-hidden shadow-[0_28px_64px_rgba(10,90,100,0.22)]"
-      style="clip-path: url(#hero-blob-clip)"
-    >
-      <img
-        :src="buildingPhoto"
-        alt="Campus universitário — Escola Superior de Ciências da Saúde"
-        class="h-full w-full object-cover"
-        loading="eager"
-        decoding="async"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-[#0a6878]/35 via-transparent to-transparent" />
+  <div class="hero-visual-root relative w-full min-w-0" aria-label="Campus da Escola Superior de Ciências da Saúde — UEA">
+
+    <div class="relative overflow-hidden">
+      <div
+        class="hero-campus-frame relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#e8f6f8] to-white shadow-[0_24px_56px_rgba(15,108,119,0.18)] ring-1 ring-primary/10"
+      >
+        <img
+          :src="campusPhoto"
+          alt="Fachada da Escola Superior de Ciências da Saúde — UEA"
+          class="hero-campus-photo block w-full object-contain object-center"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          draggable="false"
+        />
+
+        <div
+          class="pointer-events-none absolute inset-y-0 left-0 w-[28%] max-w-[9rem] bg-gradient-to-r from-[#f0f9fb] via-[#f0f9fb]/85 to-transparent sm:max-w-[11rem] lg:w-[32%] lg:max-w-[13rem]"
+          aria-hidden="true"
+        />
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a6878]/20 via-transparent to-transparent" aria-hidden="true" />
+        <div class="pointer-events-none absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-primary/80 to-transparent" aria-hidden="true" />
+      </div>
+
+      <div class="pointer-events-none absolute -bottom-8 -left-8 h-40 w-40 rounded-full bg-[#9ad06d]/30 blur-3xl" aria-hidden="true" />
+      <div class="pointer-events-none absolute -right-6 top-1/2 h-48 w-48 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl" aria-hidden="true" />
     </div>
 
-    <!-- SVG clip-path orgânico -->
-    <svg class="absolute h-0 w-0" aria-hidden="true">
-      <defs>
-        <clipPath id="hero-blob-clip" clipPathUnits="objectBoundingBox">
-          <path d="M 0.08,0.02 C 0.35,0 0.65,0.04 0.98,0.08 L 1,0.92 C 0.72,1 0.38,0.98 0.05,0.94 L 0.02,0.45 Q 0,0.2 0.08,0.02 Z" />
-        </clipPath>
-      </defs>
-    </svg>
-
-    <!-- Card: +20 anos -->
-    <div class="absolute -left-8 top-8 flex items-center gap-3 rounded-2xl border border-white/80 bg-white/95 px-5 py-4 shadow-xl backdrop-blur-md">
-      <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+    <div
+      class="absolute right-2 top-[18%] z-10 flex max-w-[14.5rem] items-start gap-3 rounded-3xl border border-white/95 bg-white/97 px-4 py-3.5 shadow-[0_14px_36px_rgba(15,108,119,0.16)] backdrop-blur-md sm:right-4 sm:max-w-[15rem] sm:px-5 sm:py-4 lg:right-6 lg:top-[22%]"
+    >
+      <div class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
         <UsersRound class="h-5 w-5" />
       </div>
-      <div>
-        <p class="text-xl font-bold leading-none text-slate-900">+20</p>
-        <p class="mt-0.5 text-xs font-medium text-slate-500">Anos de história</p>
+      <div class="min-w-0">
+        <p class="text-xl font-bold leading-none text-slate-900 sm:text-2xl">+7</p>
+        <p class="mt-1 text-xs font-semibold text-slate-700">Anos de história</p>
+        <p class="mt-1 text-[11px] leading-relaxed text-slate-500">Formando profissionais e gerando impacto</p>
       </div>
     </div>
 
-    <!-- Card: excelência -->
-    <div class="absolute -bottom-5 right-4 max-w-[14rem] rounded-2xl border border-white/80 bg-white/95 p-4 shadow-xl backdrop-blur-md">
-      <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+    <div
+      class="absolute bottom-[8%] right-2 z-10 max-w-[14.5rem] rounded-3xl border border-white/95 bg-white/97 p-4 shadow-[0_14px_36px_rgba(15,108,119,0.16)] backdrop-blur-md sm:right-6 sm:max-w-[15rem] sm:p-5 lg:bottom-[10%]"
+    >
+      <div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
         <Award class="h-4 w-4" />
       </div>
       <p class="mt-3 text-sm font-semibold leading-snug text-slate-800">
         Excelência em Ensino, Pesquisa e Impacto Social
+      </p>
+      <p class="mt-2 text-[11px] leading-relaxed text-slate-500">
+        Compromisso com a saúde da Amazônia
       </p>
     </div>
   </div>
@@ -50,10 +59,42 @@
 <script setup lang="ts">
 import { Award, UsersRound } from 'lucide-vue-next';
 
-/**
- * Foto institucional de campus (placeholder).
- * Substitua por imagem oficial da ESCS/UEA quando disponível.
- */
-const buildingPhoto =
-  'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=85';
+const campusPhoto = '/uea.png';
 </script>
+
+<style scoped>
+.hero-visual-root {
+  max-width: 100%;
+}
+
+.hero-campus-frame {
+  width: 100%;
+  max-width: 100%;
+}
+
+.hero-campus-photo {
+  aspect-ratio: 1693 / 929;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ~30% maior que o tamanho anterior, sem ultrapassar o hero */
+@media (min-width: 640px) {
+  .hero-campus-photo {
+    max-height: clamp(19.5rem, 57vw, 25.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-campus-photo {
+    max-height: clamp(24.5rem, 39vw, 31rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-campus-photo {
+    max-height: clamp(26rem, 36vw, 33rem);
+  }
+}
+</style>

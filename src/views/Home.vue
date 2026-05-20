@@ -2,58 +2,64 @@
   <div class="min-h-screen bg-gradient-to-b from-[#f0f9fb] via-white to-[#f6fbfd]">
     <Header />
 
-    <main class="overflow-hidden">
+    <main class="overflow-x-hidden">
 
       <!-- ═══════════ HERO ═══════════ -->
-      <section class="relative pb-16 pt-12 md:pb-20 md:pt-14">
+      <section class="relative overflow-hidden border-b border-primary/10 pb-16 pt-10 md:pb-20 md:pt-14">
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_60%,rgba(22,174,195,0.16),transparent_45%)]" aria-hidden="true" />
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_95%,rgba(144,214,129,0.26),transparent_35%)]" aria-hidden="true" />
 
-        <!-- Marca d'água: logo oficial ProEnSP -->
-        <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <!-- Marca d'água — restrita à coluna de texto -->
+        <div class="pointer-events-none absolute inset-0 overflow-hidden lg:right-1/2" aria-hidden="true">
           <LogoWatermark
             :src="logoHero"
-            img-class="logo-watermark-hero absolute -left-[6rem] -top-[4rem] w-[min(92vw,36rem)] max-w-none md:-left-[5rem] md:w-[40rem] lg:w-[44rem]"
+            img-class="logo-watermark-hero absolute -left-[6rem] -top-[4rem] w-[min(92vw,36rem)] max-w-none md:-left-[5rem] md:w-[40rem] lg:w-[38rem]"
           />
         </div>
 
         <div class="container relative">
-          <div class="max-w-3xl">
+          <div class="grid items-center gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12 xl:gap-14">
 
-            <div>
-              <span class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary shadow-sm backdrop-blur-md">
-                <span class="h-2 w-2 rounded-full bg-primary" />
+            <div class="order-2 lg:order-1">
+              <span class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/85 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary shadow-sm backdrop-blur-md">
+                <Landmark class="h-3.5 w-3.5 shrink-0" />
                 Institucional
               </span>
 
-              <h1 class="mt-6 max-w-2xl text-[2.6rem] font-bold leading-[1.12] text-slate-900 md:text-5xl lg:text-[3.1rem]">
-                Apresentação do
-                <span class="text-primary">ProEnSP</span>
+              <h1 class="mt-7 max-w-2xl text-[2.4rem] font-bold leading-[1.12] text-slate-900 md:text-5xl lg:text-[3.15rem] lg:leading-[1.08]">
+                Formar para transformar
+                <br>
+                a <span class="text-primary">saúde</span> e a <span class="text-primary">sociedade</span>.
               </h1>
 
-              <!-- accent underline -->
-              <div class="mt-4 h-0.5 w-10 rounded-full bg-primary" />
+              <div class="mt-5 h-1 w-14 rounded-full bg-primary" />
 
-              <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-600 md:text-[1.05rem]">
+              <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
                 O Programa de Pós-graduação em Enfermagem em Saúde Pública forma profissionais
                 para atuar com inovação, compromisso social e impacto real nos serviços de saúde
                 da região amazônica.
               </p>
 
-              <div class="mt-8 flex flex-wrap gap-3">
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <RouterLink
                   to="/apresentacao"
-                  class="inline-flex items-center gap-2 rounded-full bg-[#1a7f8e] px-7 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#166d7b] hover:shadow-lg"
+                  class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#0f9fb5] to-[#23c0c8] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-cyan-200/50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-300/55"
                 >
                   Conheça o Programa
                   <ArrowRight class="h-4 w-4" />
                 </RouterLink>
                 <a
                   href="#processos-seletivos"
-                  class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+                  class="inline-flex items-center justify-center gap-2 rounded-full border border-primary/35 bg-white/85 px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
                 >
                   Processos Seletivos
                   <ArrowRight class="h-4 w-4" />
                 </a>
               </div>
+            </div>
+
+            <div class="order-1 min-w-0 lg:order-2">
+              <HeroVisual />
             </div>
 
           </div>
@@ -197,6 +203,7 @@
 
 <script setup lang="ts">
 import Header from '@/components/Header.vue';
+import HeroVisual from '@/components/HeroVisual.vue';
 import LogoWatermark from '@/components/LogoWatermark.vue';
 import logoHero from '@/assets/logo_hero.svg';
 import LatestNewsSection from '@/components/news/LatestNewsSection.vue';

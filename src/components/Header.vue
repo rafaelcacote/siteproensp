@@ -1,8 +1,8 @@
 <template>
   <header class="sticky top-0 z-50 border-b border-border/80 bg-white/85 shadow-[0_10px_26px_rgba(14,116,130,0.08)] backdrop-blur-xl">
     <div class="container">
-      <div class="flex items-center justify-between py-3">
-        <!-- Logo Section -->
+        <div class="flex items-center justify-between py-3">
+        <!-- Logos -->
         <div class="flex h-12 items-center gap-2 shrink-0 sm:gap-3">
           <RouterLink
             to="/"
@@ -154,14 +154,13 @@ const openMobileSubmenu = ref<string | null>(null);
 
 const navigationItems = [
   { label: 'Início', href: '/' },
-  { label: 'Notícias', href: '/#noticias' },
   {
     label: 'Institucional',
     href: '/apresentacao',
     children: [
       { label: 'Apresentação', href: '/apresentacao' },
       { label: 'Coordenação e Colegiado', href: '/colegiado' },
-      { label: 'Legislação', href: '#' },
+      { label: 'Legislação', href: '/legislacao' },
       { label: 'Galeria de Fotos', href: '#' },
     ],
   },

@@ -35,6 +35,72 @@
         </div>
       </section>
 
+      <!-- Equipe de Coordenação Atual -->
+      <section class="border-b border-primary/10 bg-gradient-to-b from-white to-[#f0f9fb] py-14 md:py-20">
+        <div class="container">
+          <div class="mb-10 flex flex-col items-start gap-2">
+            <span class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+              <span class="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+              Gestão 2025–2027
+            </span>
+            <h2 class="font-display text-2xl font-bold text-slate-900 md:text-3xl">
+              Equipe de Coordenação Atual
+            </h2>
+            <p class="max-w-xl text-sm leading-relaxed text-slate-500">
+              Docentes responsáveis pela gestão didático-científica e administrativa do ProEnSP no mandato vigente.
+            </p>
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <article
+              v-for="d in coordinationTerms[0].membros"
+              :key="d.name"
+              class="group relative flex flex-col items-center overflow-hidden rounded-3xl border border-primary/10 bg-white p-6 text-center shadow-[0_8px_30px_rgba(15,108,119,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_16px_40px_rgba(15,108,119,0.13)]"
+            >
+              <!-- Anel decorativo -->
+              <div class="relative mb-5">
+                <div class="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-cyan-300/20 blur-md scale-110" aria-hidden="true" />
+                <div class="relative h-28 w-28 overflow-hidden rounded-full ring-4 ring-white shadow-lg">
+                  <img
+                    v-if="d.photo"
+                    :src="d.photo"
+                    :alt="d.name"
+                    class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div
+                    v-else
+                    class="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 to-cyan-300/20"
+                  >
+                    <span class="text-2xl font-bold text-primary">{{ getInitials(d.name) }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Badge de papel -->
+              <span class="mb-3 inline-flex items-center rounded-full bg-primary/10 px-3 py-1 font-accent text-[10px] font-bold uppercase tracking-wider text-primary">
+                {{ d.roleTag }}
+              </span>
+
+              <!-- Nome -->
+              <h3 class="text-sm font-bold leading-snug text-slate-900 md:text-base">
+                {{ d.name }}
+              </h3>
+              <p class="mt-1.5 text-xs leading-relaxed text-slate-500">
+                {{ d.role }}
+              </p>
+
+              <!-- Linha decorativa inferior -->
+              <div
+                class="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-cyan-400 transition-all duration-300 group-hover:w-full"
+                aria-hidden="true"
+              />
+            </article>
+          </div>
+        </div>
+      </section>
+
       <div class="container py-10 md:py-14">
         <ColegiadoSectionNav :sections="toc" />
 
@@ -86,53 +152,50 @@
                       </div>
                     </div>
 
-                    <dl class="mt-6 grid gap-5 sm:grid-cols-2">
-                      <div v-if="term.coord" class="rounded-xl bg-muted/40 p-4">
-                        <dt class="font-accent text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                          Coordenação
-                        </dt>
-                        <dd class="mt-2 space-y-1 text-sm leading-relaxed text-foreground">
-                          <p v-if="term.coord">
-                            <span class="text-muted-foreground">Coordenadora:</span>
-                            {{ term.coord }}
-                          </p>
-                          <p v-if="term.vice">
-                            <span class="text-muted-foreground">Vice-coordenador:</span>
-                            {{ term.vice }}
-                          </p>
-                        </dd>
-                      </div>
-                      <div v-if="term.docentes?.length" class="rounded-xl bg-muted/40 p-4">
-                        <dt class="font-accent text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                          Membros docentes permanentes
-                        </dt>
-                        <dd class="mt-2 space-y-1.5 text-sm leading-relaxed text-foreground">
-                          <p v-for="d in term.docentes" :key="d">
-                            {{ d }}
-                          </p>
-                        </dd>
-                      </div>
-                      <div v-if="term.admin || term.discente" class="sm:col-span-2">
-                        <div class="grid gap-4 sm:grid-cols-2">
-                          <div v-if="term.admin" class="rounded-xl border border-border/80 bg-background p-4">
-                            <dt class="font-accent text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                              Representante administrativo
-                            </dt>
-                            <dd class="mt-2 text-sm text-foreground">
-                              {{ term.admin }}
-                            </dd>
-                          </div>
-                          <div v-if="term.discente" class="rounded-xl border border-border/80 bg-background p-4">
-                            <dt class="font-accent text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                              Representante discente
-                            </dt>
-                            <dd class="mt-2 text-sm text-foreground">
-                              {{ term.discente }}
-                            </dd>
+                    <!-- Member cards -->
+                    <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                      <div
+                        v-for="m in term.membros"
+                        :key="m.name"
+                        class="group/card flex items-center gap-3 rounded-xl border border-transparent bg-muted/30 p-3 transition-all hover:border-primary/15 hover:bg-primary/[0.04]"
+                      >
+                        <!-- Foto ou iniciais -->
+                        <div class="relative h-16 w-16 shrink-0">
+                          <img
+                            v-if="m.photo"
+                            :src="m.photo"
+                            :alt="m.name"
+                            class="h-full w-full rounded-full object-cover object-top ring-2 ring-white shadow-sm transition-transform duration-300 group-hover/card:scale-105"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <div
+                            v-else
+                            class="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-cyan-200/40 ring-2 ring-white shadow-sm"
+                          >
+                            <span class="text-sm font-bold text-primary">{{ getInitials(m.name) }}</span>
                           </div>
                         </div>
+                        <div class="min-w-0">
+                          <p class="truncate text-xs font-semibold leading-snug text-foreground">{{ m.name }}</p>
+                          <span class="mt-1 inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 font-accent text-[9px] font-bold uppercase tracking-wide text-primary">
+                            {{ m.roleTag }}
+                          </span>
+                        </div>
                       </div>
-                    </dl>
+                    </div>
+
+                    <!-- Representantes -->
+                    <div v-if="term.admin || term.discente" class="mt-4 grid gap-3 sm:grid-cols-2">
+                      <div v-if="term.admin" class="rounded-xl border border-border/60 bg-background px-4 py-3">
+                        <p class="font-accent text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Representante administrativo</p>
+                        <p class="mt-1.5 text-sm text-foreground">{{ term.admin }}</p>
+                      </div>
+                      <div v-if="term.discente" class="rounded-xl border border-border/60 bg-background px-4 py-3">
+                        <p class="font-accent text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Representante discente</p>
+                        <p class="mt-1.5 text-sm text-foreground">{{ term.discente }}</p>
+                      </div>
+                    </div>
                   </div>
                 </article>
               </div>
@@ -196,14 +259,27 @@
                 </h3>
                 <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   <li
-                    v-for="name in colegiadoDocentes"
-                    :key="name"
-                    class="flex items-center gap-3 rounded-xl border border-transparent bg-muted/30 px-3 py-2.5 text-sm text-foreground transition hover:border-primary/15 hover:bg-primary/[0.04]"
+                    v-for="doc in colegiadoDocentes"
+                    :key="doc.name"
+                    class="group/doc flex items-center gap-3 rounded-xl border border-transparent bg-muted/30 px-3 py-2.5 transition hover:border-primary/15 hover:bg-primary/[0.04]"
                   >
-                    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary" aria-hidden="true">
-                      <User class="h-4 w-4" />
-                    </span>
-                    <span class="leading-snug">{{ name }}</span>
+                    <div class="relative h-14 w-14 shrink-0">
+                      <img
+                        v-if="doc.photo"
+                        :src="doc.photo"
+                        :alt="doc.name"
+                        class="h-full w-full rounded-full object-cover object-top ring-2 ring-white shadow-sm transition-transform duration-300 group-hover/doc:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div
+                        v-else
+                        class="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-cyan-200/40 ring-2 ring-white shadow-sm"
+                      >
+                        <span class="text-xs font-bold text-primary">{{ getInitials(doc.name) }}</span>
+                      </div>
+                    </div>
+                    <span class="text-sm leading-snug text-foreground">{{ doc.name }}</span>
                   </li>
                 </ul>
 
@@ -263,7 +339,18 @@ import Header from '@/components/Header.vue';
 import ScrollTop from 'primevue/scrolltop';
 import LogoWatermark from '@/components/LogoWatermark.vue';
 import logoHero from '@/assets/logo_hero.svg';
-import { Award, CalendarDays, Landmark, User, UsersRound } from 'lucide-vue-next';
+import { Award, CalendarDays, Landmark, UsersRound } from 'lucide-vue-next';
+
+const profNazare = '/img/professores/prof_nazare.jpeg';
+const profWagner = '/img/professores/prof_wagner.jpeg';
+const profAmelia = '/img/professores/prof_amelia.jpeg';
+const profDarlisom = '/img/professores/prof_Darlisom.jpeg';
+
+function getInitials(name: string): string {
+  const cleaned = name.replace(/^(Dra?\.|Prof\.?a?)\s*/i, '').trim();
+  const parts = cleaned.split(' ').filter((p) => p.length > 2);
+  return parts.slice(0, 2).map((p) => p[0].toUpperCase()).join('');
+}
 
 const toc = [
   { id: 'coordenacao', label: 'Coordenação do ProEnSP', short: 'Coordenação' },
@@ -272,12 +359,17 @@ const toc = [
   { id: 'cronograma', label: 'Cronograma de reuniões', short: 'Reuniões' },
 ] as const;
 
+interface Membro {
+  name: string;
+  role: string;
+  roleTag: string;
+  photo?: string;
+}
+
 interface CoordTerm {
   period: string;
   portaria: string;
-  coord?: string;
-  vice?: string;
-  docentes?: string[];
+  membros: Membro[];
   admin?: string;
   discente?: string;
 }
@@ -286,11 +378,11 @@ const coordinationTerms: CoordTerm[] = [
   {
     period: 'Ano 2025–2027',
     portaria: 'Portaria nº 516/2025 — GR/UEA',
-    coord: 'Dra. Maria de Nazaré de Souza Ribeiro',
-    vice: 'Dr. Wagner Ferreira Monteiro',
-    docentes: [
-      'Dra. Amélia Nunes Sicsú',
-      'Dr. Darlisom Sousa Ferreira',
+    membros: [
+      { name: 'Dra. Maria de Nazaré de Souza Ribeiro', role: 'Coordenadora', roleTag: 'Coordenação', photo: profNazare },
+      { name: 'Dr. Wagner Ferreira Monteiro', role: 'Vice-coordenador', roleTag: 'Vice-coord.', photo: profWagner },
+      { name: 'Dra. Amélia Nunes Sicsú', role: 'Docente Permanente', roleTag: 'Docente', photo: profAmelia },
+      { name: 'Dr. Darlisom Sousa Ferreira', role: 'Docente Permanente', roleTag: 'Docente', photo: profDarlisom },
     ],
     admin: 'Miracele Godinho Guimarães',
     discente: 'Adriana Raquel Nunes de Souza',
@@ -298,32 +390,32 @@ const coordinationTerms: CoordTerm[] = [
   {
     period: 'Ano 2023–2025',
     portaria: 'Portaria nº 217/2023 — GR/UEA',
-    coord: 'Dra. Amélia Nunes Sicsú',
-    vice: 'Dra. Maria de Nazaré de Souza Ribeiro',
-    docentes: [
-      'Dra. Edinilza Ribeiro dos Santos',
-      'Dra. Aldalice Aguiar de Souza',
+    membros: [
+      { name: 'Dra. Amélia Nunes Sicsú', role: 'Coordenadora', roleTag: 'Coordenação', photo: profAmelia },
+      { name: 'Dra. Maria de Nazaré de Souza Ribeiro', role: 'Vice-coordenadora', roleTag: 'Vice-coord.', photo: profNazare },
+      { name: 'Dra. Edinilza Ribeiro dos Santos', role: 'Docente Permanente', roleTag: 'Docente' },
+      { name: 'Dra. Aldalice Aguiar de Souza', role: 'Docente Permanente', roleTag: 'Docente' },
     ],
   },
   {
     period: 'Ano 2020–2022',
     portaria: 'Portaria nº 0390/2020 — GR/UEA',
-    coord: 'Dra. Amélia Nunes Sicsú',
-    vice: 'Dra. Maria de Nazaré de Souza Ribeiro',
-    docentes: [
-      'Dra. Edinilza Ribeiro dos Santos',
-      'Dra. Elizabeth Teixeira',
+    membros: [
+      { name: 'Dra. Amélia Nunes Sicsú', role: 'Coordenadora', roleTag: 'Coordenação', photo: profAmelia },
+      { name: 'Dra. Maria de Nazaré de Souza Ribeiro', role: 'Vice-coordenadora', roleTag: 'Vice-coord.', photo: profNazare },
+      { name: 'Dra. Edinilza Ribeiro dos Santos', role: 'Docente Permanente', roleTag: 'Docente' },
+      { name: 'Dra. Elizabeth Teixeira', role: 'Docente Permanente', roleTag: 'Docente' },
     ],
     discente: 'Lara Bezerra de Oliveira (Turma 2019)',
   },
   {
     period: 'Ano 2018–2020',
     portaria: 'Portaria nº 795/2018 — GR/UEA',
-    coord: 'Dra. Amélia Nunes Sicsú',
-    vice: 'Dr. Leonardo Naves dos Reis',
-    docentes: [
-      'Dra. Edinilza Ribeiro dos Santos',
-      'Dra. Elizabeth Teixeira',
+    membros: [
+      { name: 'Dra. Amélia Nunes Sicsú', role: 'Coordenadora', roleTag: 'Coordenação', photo: profAmelia },
+      { name: 'Dr. Leonardo Naves dos Reis', role: 'Vice-coordenador', roleTag: 'Vice-coord.' },
+      { name: 'Dra. Edinilza Ribeiro dos Santos', role: 'Docente Permanente', roleTag: 'Docente' },
+      { name: 'Dra. Elizabeth Teixeira', role: 'Docente Permanente', roleTag: 'Docente' },
     ],
   },
 ];
@@ -372,21 +464,26 @@ const commissionTerms: CommissionTerm[] = [
   },
 ];
 
-const colegiadoDocentes = [
-  'Dra. Aldalice Pinto de Aguiar',
-  'Dra. Amélia Nunes Sicsú',
-  'Dra. Cleisiane Xavier Diniz',
-  'Dra. Denise Maria Guerreiro Vieira da Silva',
-  'Dr. Darlisom Sousa Ferreira',
-  'Dra. Edinilza Ribeiro dos Santos',
-  'Dra. Elielza Guerreiro Menezes',
-  'Dra. Flávia Regina Souza Ramos',
-  'Dra. Giane Zupellari dos Santos Melo',
-  'Dra. Gisele dos Santos Rocha',
-  'Dra. Jacqueline de Almeida Gonçalves Sachett',
-  'Dra. Lihsieh Marrero',
-  'Dra. Maria de Nazaré de Souza Ribeiro',
-  'Dr. Wagner Ferreira Monteiro',
+interface ColegiadoDocente {
+  name: string;
+  photo?: string;
+}
+
+const colegiadoDocentes: ColegiadoDocente[] = [
+  { name: 'Dra. Aldalice Pinto de Aguiar' },
+  { name: 'Dra. Amélia Nunes Sicsú', photo: profAmelia },
+  { name: 'Dra. Cleisiane Xavier Diniz' },
+  { name: 'Dra. Denise Maria Guerreiro Vieira da Silva' },
+  { name: 'Dr. Darlisom Sousa Ferreira', photo: profDarlisom },
+  { name: 'Dra. Edinilza Ribeiro dos Santos' },
+  { name: 'Dra. Elielza Guerreiro Menezes' },
+  { name: 'Dra. Flávia Regina Souza Ramos' },
+  { name: 'Dra. Giane Zupellari dos Santos Melo' },
+  { name: 'Dra. Gisele dos Santos Rocha' },
+  { name: 'Dra. Jacqueline de Almeida Gonçalves Sachett' },
+  { name: 'Dra. Lihsieh Marrero' },
+  { name: 'Dra. Maria de Nazaré de Souza Ribeiro', photo: profNazare },
+  { name: 'Dr. Wagner Ferreira Monteiro', photo: profWagner },
 ];
 
 const colegiadoDiscente = 'Adriana Raquel Nunes de Souza (Turma 2023), eleita por seus pares.';
