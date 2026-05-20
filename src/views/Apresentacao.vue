@@ -1,50 +1,36 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-b from-[#f3fafc] via-white to-[#f6fbfd]">
+  <div class="min-h-screen bg-gradient-to-b from-[#f0f9fb] via-white to-[#f6fbfd]">
     <Header />
 
     <main class="overflow-hidden">
-      <section class="relative border-b border-primary/10 pb-16 pt-12 md:pb-20 md:pt-16">
+      <!-- Hero -->
+      <section class="relative border-b border-primary/10 pb-14 pt-12 md:pb-20 md:pt-16">
         <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <LogoWatermark
-            img-class="absolute -left-[6rem] -top-[4rem] w-[min(92vw,36rem)] max-w-none md:-left-[5rem] md:w-[40rem] lg:w-[44rem]"
+            :src="logoHero"
+            img-class="logo-watermark-hero absolute -left-[5rem] -top-[3rem] w-[min(88vw,34rem)] max-w-none md:-left-[4rem] md:w-[38rem] lg:w-[42rem]"
           />
+          <div class="absolute -right-20 top-0 h-64 w-64 rounded-full bg-primary/[0.06] blur-3xl" />
         </div>
 
-        <div class="container relative">
-          <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
-            <div>
-              <span class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/75 px-4 py-1.5 shadow-sm backdrop-blur-md">
-                <Landmark class="h-3.5 w-3.5 text-primary" />
-                <span class="font-accent text-xs font-semibold uppercase tracking-[0.2em] text-primary">Institucional</span>
-              </span>
+        <div class="container relative z-10">
+          <div class="max-w-3xl">
+            <span class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary shadow-sm backdrop-blur-md">
+              <span class="h-2 w-2 shrink-0 rounded-full bg-primary" aria-hidden="true" />
+              Institucional
+            </span>
 
-              <h1 class="mt-7 max-w-3xl text-4xl font-bold leading-tight text-slate-900 md:text-5xl lg:text-[3.5rem] lg:leading-[1.06]">
-                Apresentação do
-                <span class="text-primary">ProEnSP</span>
-              </h1>
-              <p class="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
-                O Programa de Pós-graduação em Enfermagem em Saúde Pública forma profissionais para atuar com inovação,
-                compromisso social e impacto real nos serviços de saúde da região amazônica.
-              </p>
+            <h1 class="font-display mt-6 text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl lg:text-[3.2rem] lg:leading-[1.08]">
+              Apresentação do
+              <span class="text-primary"> ProEnSP</span>
+            </h1>
 
-              <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="#proensp"
-                  class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#0f9fb5] to-[#23c0c8] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-cyan-200/50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-300/55"
-                >
-                  Conheça o Programa
-                  <ArrowRight class="h-4 w-4" />
-                </a>
-                <a
-                  href="#processos-seletivos"
-                  class="inline-flex items-center justify-center gap-2 rounded-xl border border-primary/25 bg-white/80 px-6 py-3.5 text-sm font-semibold text-primary shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-primary/5"
-                >
-                  Processos Seletivos
-                </a>
-              </div>
-            </div>
+            <div class="mt-4 h-0.5 w-10 rounded-full bg-primary" aria-hidden="true" />
 
-            <HeroVisual />
+            <p class="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
+              O Programa de Pós-graduação em Enfermagem em Saúde Pública forma profissionais para atuar com inovação,
+              compromisso social e impacto real nos serviços de saúde da região amazônica.
+            </p>
           </div>
         </div>
       </section>
@@ -172,8 +158,8 @@
 
 <script setup lang="ts">
 import Header from '@/components/Header.vue';
-import HeroVisual from '@/components/HeroVisual.vue';
 import LogoWatermark from '@/components/LogoWatermark.vue';
+import logoHero from '@/assets/logo_hero.svg';
 import { ArrowRight, Award, CalendarDays, GraduationCap, Landmark, UsersRound } from 'lucide-vue-next';
 import type { Component } from 'vue';
 
